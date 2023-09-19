@@ -15,15 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.urls import path, include
+from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
 from .healthcheck import healthcheck
 
 urlpatterns = [
-    path(route='healthcheck/', view=healthcheck, name='healthcheck'),
-    path('auth/', include('apps.users.urls')),
-    path('transactions/', include('apps.transactions.urls')),
-    path('wallet/', include('apps.wallets.urls')),
+    path(route="healthcheck/", view=healthcheck, name="healthcheck"),
+    path("auth/", include("apps.users.urls")),
+    path("transactions/", include("apps.transactions.urls")),
+    path("wallet/", include("apps.wallets.urls")),
 ]
 
 if settings.DEBUG:

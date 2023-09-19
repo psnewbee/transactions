@@ -6,17 +6,14 @@ from rest_framework_simplejwt.exceptions import AuthenticationFailed, InvalidTok
 
 
 class IsAuthenticated(_IsAuthenticated):
-
     def has_permission(self, request, view) -> bool:
         return request.auth is not None
 
 
 class CookiesAuthentication(JWTAuthentication):
-    
     def authenticate(self, request):
         token = request.COOKIES.get(settings.REST_FRAMEWORK["JWT_AUTH_COOKIE"])
         return self.get_user_token_pair(token)
-
 
     def get_user_token_pair(self, token):
         try:
@@ -28,7 +25,6 @@ class CookiesAuthentication(JWTAuthentication):
 
 
 class CookiesAuthenticationExtension(OpenApiAuthenticationExtension):
-
     target_class = CookiesAuthentication
     name = "Authorization"
 

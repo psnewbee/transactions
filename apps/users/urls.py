@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import sign_up, sign_in, logout
+
+from .views import logout, sign_in, sign_up
 
 urlpatterns = [
     path(

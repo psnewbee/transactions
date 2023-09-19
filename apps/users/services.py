@@ -3,7 +3,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 
 def get_token_http_reponse(user, refresh_token: str = None) -> HttpResponse:
-
     http_response = HttpResponse(status=200)
     if refresh_token:
         token = RefreshToken(token=refresh_token)
@@ -13,8 +12,8 @@ def get_token_http_reponse(user, refresh_token: str = None) -> HttpResponse:
     http_response.set_cookie("access", str(token.access_token), httponly=True)
     return http_response
 
-def get_logout_http_response(token: str) -> HttpResponse:
 
+def get_logout_http_response(token: str) -> HttpResponse:
     token = RefreshToken(token)
     token.blacklist()
     http_response = HttpResponse(status=204)

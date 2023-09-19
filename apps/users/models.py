@@ -1,10 +1,8 @@
-from django.contrib.auth import (
-    models as auth_models,
-    validators,
-)
+from django.contrib.auth import models as auth_models
+from django.contrib.auth import validators
 from django.db import models
 
-from extentions import UserManager, BaseModel
+from extentions import BaseModel, UserManager
 
 
 class User(auth_models.AbstractBaseUser, BaseModel):
@@ -16,7 +14,7 @@ class User(auth_models.AbstractBaseUser, BaseModel):
         },
     )
 
-    objects: 'UserManager' = UserManager()
+    objects: "UserManager" = UserManager()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

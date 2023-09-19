@@ -1,10 +1,13 @@
 from django.db import models
+
 from extentions import BaseModel, enums
 
 
 class Transaction(BaseModel):
     amount = models.IntegerField()
-    status = models.CharField(default=enums.TransactionStatusEnum.successful.value, max_length=35)
+    status = models.CharField(
+        default=enums.TransactionStatusEnum.successful.value, max_length=35
+    )
     type = models.CharField(max_length=6)
     category = models.ForeignKey(
         "transactions.UserCategory",
@@ -15,7 +18,7 @@ class Transaction(BaseModel):
     )
 
     class Meta:
-        db_table = 'transactions'
+        db_table = "transactions"
 
 
 class UserTransaction(BaseModel):
@@ -46,4 +49,4 @@ class UserCategory(BaseModel):
     title = models.CharField(max_length=100)
 
     class Meta:
-        db_table = 'user_categories'
+        db_table = "user_categories"

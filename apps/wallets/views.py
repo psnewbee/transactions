@@ -1,12 +1,13 @@
 from django.http import HttpRequest, HttpResponse
 from drf_spectacular.utils import OpenApiResponse, extend_schema
+from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.parsers import JSONParser
-from rest_framework import status
 
 from apps.users.models import User
+
 from .models import Wallet
 from .serialiers import WalletInfoSerializer
 
@@ -28,10 +29,8 @@ from .serialiers import WalletInfoSerializer
 )
 @api_view(["GET"])
 def get_wallet_balance(request: HttpRequest) -> HttpResponse:
-
     wallet = Wallet.objects.get(user=request.user)
 
     return Response(
-        data=WalletInfoSerializer(wallet).data,
-        status=status.HTTP_201_CREATED
+        data=WalletInfoSerializer(wallet).data, status=status.HTTP_201_CREATED
     )

@@ -1,4 +1,5 @@
 from django.db import models
+
 from extentions import BaseModel
 
 
@@ -10,7 +11,7 @@ class Wallet(BaseModel):
     )
 
     class Meta:
-        db_table= 'wallets'
+        db_table = "wallets"
 
     def check_wallet_solvency(self, cashflow: int) -> bool:
         return (self.balance - cashflow) >= 0

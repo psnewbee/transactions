@@ -1,12 +1,13 @@
 from django.urls import path
+
 from .views import (
-    get_transactions,
     create_transaction,
-    delete_transaction,
-    update_transaction,
-    get_transaction_categories,
     create_transaction_category,
+    delete_transaction,
     delete_transaction_categories,
+    get_transaction_categories,
+    get_transactions,
+    update_transaction,
     update_transaction_category,
 )
 
