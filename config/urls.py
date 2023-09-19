@@ -17,16 +17,14 @@ Including another URLconf
 from django.conf import settings
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-from .healcthcheck import healthcheck
+from .healthcheck import healthcheck
 
 urlpatterns = [
     path(route='healthcheck/', view=healthcheck, name='healthcheck'),
     path('auth/', include('apps.users.urls')),
     path('transactions/', include('apps.transactions.urls')),
     path('wallet/', include('apps.wallets.urls')),
-
 ]
-
 
 if settings.DEBUG:
     urlpatterns.extend(

@@ -1,0 +1,50 @@
+version: '3.9'
+
+name: 'transactions_project'
+
+services:
+  api:
+    container_name: transactions-api
+    image: transactions-api
+    restart: unless-stopped
+    command: >
+      bash -c "python manage.py makemigrations &&
+              python manage.py migrate &&
+              python manage.py runserver 0.0.0.0:8000"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - ${API_PORT}:8000
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    networks:
+      - transactions-net
+
+  postgres:
+    container_name: transactions-db
+    image: postgres:12
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/pgdata
+    ports:
+      - ${DB_EXTERNAL_PORT}:${DB_PORT}
+    environment:
+      PGDATA: '/var/lib/postgresql/data/pgdata'
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    env_file:
+      - .env
+    networks:
+      - transactions-net
+
+volumes:
+  postgres_data:
+
+networks:
+  transactions-net:
+    driver: bridge
