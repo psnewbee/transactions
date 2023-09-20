@@ -8,3 +8,8 @@ repos:
     hooks:
       - id: isort
         args: ["--profile", "black", "--filter-files"]
+  - repo: https://github.com/PyCQA/docformatter
+    rev: v1.7.5
+    hooks:
+      - id: docformatter
+        entry: docformatter -i --wrap-summaries 120 --wrap-descriptions 120

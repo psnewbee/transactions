@@ -1,5 +1,4 @@
-"""
-WSGI config for bookmarks project.
+"""WSGI config for bookmarks project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
